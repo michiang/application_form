@@ -29,7 +29,7 @@ export default class App extends Component {
   render() {
     return (
     <div>
-     <div className="card-panel teal lighten-2">SimpleForms</div>
+     <div className="card-panel teal simple-forms ">Powered by SimpleForms</div>
      <div style={{textAlign: 'center'}}>
         <h1>Apply for Jersey Mike's</h1>
         <p> Fill out the following form to apply for an open position at Jersey Mikes</p>
@@ -39,7 +39,7 @@ export default class App extends Component {
         <p> 1. Selection Location/Position </p>
         <hr/>
     <div className="input-field col s6">
-	  <a className='dropdown-button btn' href='#' data-activates='location'>Select Location</a>
+	  <a className="dropdown-button btn purple simple-forms " href='#' data-activates='location'>Select Location</a>
 
   		<ul id='location' className='dropdown-content'>
     		<li><a href="#!">Location 1</a></li>
@@ -51,7 +51,7 @@ export default class App extends Component {
   	</div>
 
   	<div className="input-field col s6">
-  	 <a className='dropdown-button btn' href='#' data-activates='position'>Select Position</a>
+  	 <a className='dropdown-button btn purple simple-forms' href='#' data-activates='position'>Select Position</a>
 
   		<ul id='position' className='dropdown-content'>
     		<li><a href="#!">Position 1</a></li>
@@ -98,7 +98,7 @@ export default class App extends Component {
         </div>
       <div className="row">
       	<div className="input-field col s6">
-  	 		<a className='dropdown-button btn' href='#' data-activates='gender'>Gender</a>
+  	 		<a className='dropdown-button btn purple simple-forms' href='#' data-activates='gender'>Gender</a>
 
   		<ul id='gender' className='dropdown-content'>
     		<li><a href="#!">Male</a></li>
@@ -123,7 +123,7 @@ export default class App extends Component {
      </div>
 
      <div className="input-field col s12">
-  	 <a className='dropdown-button btn' href='#' data-activates='country'>Country</a>
+  	 <a className='dropdown-button btn purple simple-forms' href='#' data-activates='country'>Country</a>
 
   		<ul id='country' className='dropdown-content'>
     		<li><a href="#!">Position 1</a></li>
@@ -139,7 +139,7 @@ export default class App extends Component {
          <label htmlFor="city">City</label>
      </div>
     <div className="input-field col s2">
-  	 <a className='dropdown-button btn' href='#' data-activates='state'>State</a>
+  	 <a className='dropdown-button btn purple simple-forms' href='#' data-activates='state'>State</a>
 
   		<ul id='state' className='dropdown-content'>
     		<li><a href="#!">Position 1</a></li>
@@ -155,7 +155,7 @@ export default class App extends Component {
          <label htmlFor="zip">City</label>
      </div>
   	<div className="input-field col s12" style={{textAlign: 'center'}}>
-        <button className="btn waves-effect waves-light" type="submit" name="action">Submit</button>
+        <button className="btn waves-effect waves-light purple simple-forms" type="submit" name="action">Submit</button>
      </div>
 
 
