@@ -67,33 +67,33 @@ export default class App extends Component {
 
       <div className="row">
         <div className="input-field col s6">
-          <input id="first_name" type="text" className="validate"></input>
+          <input id="first_name" type="text" className="validate[required]"></input>
           <label htmlFor="first_name">First Name</label>
         </div>
         <div className="input-field col s6">
-          <input id="last_name" type="text" className="validate"></input>
+          <input id="last_name" type="text" className="validate[required]"></input>
           <label htmlFor="last_name">Last Name</label>
         </div>
       </div>
       <div className="row">
         <div className="input-field col s12">
-          <input id="email" type="email" className="validate"></input>
+          <input id="email" type="email" className="validate[required]"></input>
           <label htmlFor="email">Email</label>
         </div>
       </div>
       <div className="row">
         <div className="input-field col s12">
-          <input id="confirm" placeholder="Confirm Email" type="email" className="validate"></input>
+          <input id="confirm" placeholder="Confirm Email" type="email" className="validate[required]"></input>
           <label htmlFor="confirm">Email</label>
         </div>
       </div>
       <div className="row">
       	<div className="input-field col s7">
-          <input id="icon_telephone" type="tel" className="validate"></input>
+          <input id="icon_telephone" type="tel" className="validate[required]"></input>
           <label htmlFor="icon_telephone">Phone Number</label>
         </div>
       	<div className="input-field col s6">
-          <input id="birthdate" type="tel" className="validate"></input>
+          <input id="birthdate" type="tel" className="validate[required]"></input>
           <label htmlFor="birthdate">Birth Date</label>
         </div>
       <div className="row">
@@ -113,11 +113,11 @@ export default class App extends Component {
   	 	</div>
   	 </div>
   	 	<div className="input-field col s10">
-          <input id="address" type="text" className="validate"></input>
+          <input id="address" type="text" className="validate[required]"></input>
           <label htmlFor="address">Address</label>
         </div>
         <div className="input-field col s10">
-          <input id="address2" type="text" className="validate"></input>
+          <input id="address2" type="text" className="validate[required]"></input>
           <label htmlFor="address2">Address 2</label>
         </div>
      </div>
@@ -135,7 +135,7 @@ export default class App extends Component {
 
   	</div> 
   	<div className="input-field col s4">
-         <input id="city" type="text" className="validate"></input>
+         <input id="city" type="text" className="validate[required]"></input>
          <label htmlFor="city">City</label>
      </div>
     <div className="input-field col s2">
@@ -151,7 +151,7 @@ export default class App extends Component {
 
   	</div> 
   	<div className="input-field col s4">
-         <input id="zip" type="text" className="validate"></input>
+         <input id="zip" type="text" className="validate[required]"></input>
          <label htmlFor="zip">City</label>
      </div>
   	<div className="input-field col s12" style={{textAlign: 'center'}}>
