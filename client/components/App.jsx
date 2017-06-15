@@ -5,47 +5,59 @@ export default class App extends Component {
 		super();
 
 		this.state = {
-			firstName: ""
+      email: '',
+			confirm: '',
+      confirmError:'',
+      formErrors: {email: '', confirm: ''},
+      emailValid: false,
+      formValid: false
 		};
 
-		this.firstNameValidate = this.firstNameValidate.bind(this);
-		this.lastNameValidate = this.lastNameValidate.bind(this);
+    this.handleEmailChange = this.handleEmailChange.bind(this);
+    this.handleConfirmEmailChange = this.handleConfirmEmailChange.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
 
-	}
+	}  
 	componentDidMount() {
-		console.log("mounted");
+	 
 	}
 
-	firstNameValidate() {
 
-	}
-
-	lastNameValidate() {
-
-	}
-
-  emailValidate() {
-    
+  handleEmailChange(event) {
+    this.setState({email: event.target.value});
   }
 
+  handleConfirmEmailChange(event) {
+    this.setState({confirm: event.target.value});
+  }
 
+  handleSubmit(event) {
+    const context = this;
+    if (this.state.email !== this.state.confirm) {
+      context.setState({
+        
+      })
+    }
+    console.log("Your job application has been submitted:");
+    event.preventDefault();
+  }
 
   render() {
     return (
     <div>
      <div className="card-panel teal simple-forms ">Powered by SimpleForms</div>
      <div style={{textAlign: 'center'}}>
-        <h1>Apply for Jersey Mike's</h1>
-        <p> Fill out the following form to apply for an open position at Jersey Mikes</p>
+        <h1>Apply for SimpleForms</h1>
+        <p> Fill out the following form to apply for an open position at SimpleForms</p>
      </div>
     <div className="row">
-    <form className="col s12">
+    <form className="col s12" onSubmit={this.handleSubmit}>
         <p> 1. Selection Location/Position </p>
         <hr/>
     <div className="input-field col s6">
-	  <a className="dropdown-button btn purple simple-forms " href='#' data-activates='location'>Select Location</a>
+	  <a id='location'className="dropdown-button btn purple simple-forms " href='#' data-activates='location'>Select Location</a>
 
-  		<ul id='location' className='dropdown-content'>
+  		<ul id='location'className='dropdown-content'>
     		<li><a href="#!">Location 1</a></li>
     		<li><a href="#!">Location 2</a></li>
     		<li><a href="#!">Location 3</a></li>
@@ -68,36 +80,37 @@ export default class App extends Component {
   	</div>
   	<br/> <br/> <br/> 
   	    <p> 2. Personal Info </p> <hr /> <br />
+      <div className="row">
+        <div className="input-field col s6">
+          <input id="first_name" type="text" className="validate" required="" aria-required="true"></input>
+          <label htmlFor="first_name" data-success="Valid" className="active">First Name</label>
+        </div>
 
-      <div className="row">
         <div className="input-field col s6">
-          <input id="first_name" type="text" className="validate[required]"></input>
-          <label htmlFor="first_name">First Name</label>
-        </div>
-        <div className="input-field col s6">
-          <input id="last_name" type="text" className="validate[required]"></input>
-          <label htmlFor="last_name">Last Name</label>
+          <input id="last_name" type="text" className="validate" required="" aria-required="true"></input>
+          <label htmlFor="last_name" data-sucess="Valid" className="active">Last Name</label>
         </div>
       </div>
       <div className="row">
         <div className="input-field col s12">
-          <input id="email" type="email" className="validate[required]"></input>
-          <label htmlFor="email">Email</label>
+          <input id="email" type="email" value={this.state.email} onChange={this.handleEmailChange} className="validate"></input>
+          <label htmlFor="email" data-error="Invalid Email" data-success="Valid Email">Email</label>
         </div>
       </div>
       <div className="row">
         <div className="input-field col s12">
-          <input id="confirm" placeholder="Confirm Email" type="email" className="validate[required]"></input>
+          <input id="confirm" placeholder="Confirm Email" type="email" value={this.state.confirm} onChange={this.handleConfirmEmailChange} className="validate
+          "></input>
           <label htmlFor="confirm">Email</label>
         </div>
       </div>
       <div className="row">
       	<div className="input-field col s7">
-          <input id="icon_telephone" type="tel" className="validate[required]"></input>
-          <label htmlFor="icon_telephone">Phone Number</label>
+          <input id="icon_telephone" type="tel" className="validate"></input>
+          <label htmlFor="icon_telephone" data-error="Invalid Phone Number" data-success="Valid Phone Number" className="active">Phone Number</label>
         </div>
       	<div className="input-field col s6">
-          <input id="birthdate" type="tel" className="validate[required]"></input>
+          <input id="birthdate" type="tel" className="validate"></input>
           <label htmlFor="birthdate">Birth Date</label>
         </div>
       <div className="row">
@@ -117,11 +130,11 @@ export default class App extends Component {
   	 	</div>
   	 </div>
   	 	<div className="input-field col s10">
-          <input id="address" type="text" className="validate[required]"></input>
+          <input id="address" type="text" className="validate"></input>
           <label htmlFor="address">Address</label>
         </div>
         <div className="input-field col s10">
-          <input id="address2" type="text" className="validate[required]"></input>
+          <input id="address2" type="text" className="validate"></input>
           <label htmlFor="address2">Address 2</label>
         </div>
      </div>
@@ -139,7 +152,7 @@ export default class App extends Component {
 
   	</div> 
   	<div className="input-field col s4">
-         <input id="city" type="text" className="validate[required]"></input>
+         <input id="city" type="text" className="validate"></input>
          <label htmlFor="city">City</label>
      </div>
     <div className="input-field col s2">
@@ -155,7 +168,7 @@ export default class App extends Component {
 
   	</div> 
   	<div className="input-field col s4">
-         <input id="zip" type="text" className="validate[required]"></input>
+         <input id="zip" type="text" className="validate"></input>
          <label htmlFor="zip">City</label>
      </div>
   	<div className="input-field col s12" style={{textAlign: 'center'}}>
