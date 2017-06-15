@@ -24,6 +24,10 @@ export default class App extends Component {
 
 	}
 
+  emailValidate() {
+    
+  }
+
 
 
   render() {
