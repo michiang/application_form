@@ -1820,7 +1820,7 @@ input,
 optgroup,
 select,
 textarea {
-  color: inherit;
+  color: #5A5075;
   /* 1 */
   font: inherit;
   /* 2 */
