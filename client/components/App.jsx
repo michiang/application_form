@@ -7,22 +7,19 @@ export default class App extends Component {
 		this.state = {
       email: '',
 			confirm: '',
-      confirmError:'',
-      formErrors: {email: '', confirm: ''},
-      emailValid: false,
-      formValid: false
+      zip: '',
+      validate: false,
+      zipValidate: false
+      
 		};
 
     this.handleEmailChange = this.handleEmailChange.bind(this);
     this.handleConfirmEmailChange = this.handleConfirmEmailChange.bind(this);
+    this.handleEmailBlur = this.handleEmailBlur.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
-
+    this.confirmEmail = this.confirmEmail.bind(this);
+    this.confirmZip = this.confirmZip.bind(this);
 	}  
-
-	componentDidMount() {
-	 
-	}
-
 
   handleEmailChange(event) {
     this.setState({email: event.target.value});
@@ -32,15 +29,42 @@ export default class App extends Component {
     this.setState({confirm: event.target.value});
   }
 
-  handleSubmit(event) {
-    const context = this;
-    if (this.state.email !== this.state.confirm) {
-      context.setState({
+  handleEmailBlur() {
+    this.setState({validate: true});
+  }
 
-      })
-    }
+  handleSubmit(event) {
     console.log("Your job application has been submitted:");
     event.preventDefault();
+  }
+
+  confirmEmail() {
+    if (this.state.validate && this.state.email !== this.state.confirm) {
+      let email = document.getElementById("email");
+      let confirmEmail = document.getElementById("confirm");
+        function validateEmail(){
+          if(email.value != confirmEmail.value) {
+            confirmEmail.setCustomValidity("Emails Don't Match");
+          } else {
+            confirmEmail.setCustomValidity('');
+          }
+        } 
+        email.onchange = validateEmail;
+        confirmEmail.onkeyup = validateEmail;
+
+      return (
+          <label htmlFor="confirm" data-error="The emails do not match">Confirm Email</label>
+        );
+    } else if (this.state.validate && this.state.email === this.state.confirm) {
+      return (
+          <label htmlFor="confirm" data-success="Match">Confirm Email</label>
+        )
+    }
+    return null;
+  }
+
+  confirmZip() {
+  
   }
 
     render() {
@@ -86,7 +110,7 @@ export default class App extends Component {
 
         <div className="input-field col s6">
           <input id="last_name" type="text" className="validate" required></input>
-          <label htmlFor="last_name" data-sucess="Valid" className="active">Last Name</label>
+          <label htmlFor="last_name" data-success="Valid" className="active">Last Name</label>
         </div>
       </div>
       <div className="row">
@@ -99,14 +123,16 @@ export default class App extends Component {
       <div className="row">
         <div className="input-field col s12">
           <i className="material-icons prefix">verified_user</i>
-          <input id="confirm" placeholder="Confirm Email" type="email" value={this.state.confirm} onChange={this.handleConfirmEmailChange} className="validate" required></input>
-          <label htmlFor="confirm" data-error="Emails do not match" data-success="Valid Email"></label>
+          <input id="confirm" type="email" value={this.state.confirm} onChange={this.handleConfirmEmailChange} onBlur={this.handleEmailBlur} className="validate" required></input>
+          {this.confirmEmail() ||
+            <label htmlFor="confirm">Confirm Email</label>
+          }
         </div>
       </div>
       <div className="row">
         <div className="input-field col s7">
           <i className="material-icons prefix">phone</i>
-          <input id="icon_telephone" type="tel" className="validate" required></input>
+          <input id="icon_telephone" type="number" className="validate" required></input>
           <label htmlFor="icon_telephone" data-error="Invalid Phone Number" data-success="Valid Phone Number" className="active">Phone Number</label>
         </div>
       </div>
@@ -115,10 +141,8 @@ export default class App extends Component {
           <i className="material-icons prefix">person_pin</i>
           <input type="date" className="datepicker"></input>
         </div>
-      </div>
       
-      <div className="row">
-        <div className="input-field col s6">
+        <div className="input-field col s2">
           <select>
             <option value="" disabled selected>Gender</option>
             <option value="1">Male</option>
@@ -127,6 +151,7 @@ export default class App extends Component {
           </select>
         </div>
       </div>
+      
       <div className="row">
         <div className="input-field col s12">
           <p> 3. Address Info </p> <hr/>
@@ -165,7 +190,7 @@ export default class App extends Component {
 
       </div> 
         <div className="input-field col s4">
-          <input id="zip" type="text" className="validate" required></input>
+          <input id="zip" type="number" value={this.state.zip} className="validate" required></input>
           <label htmlFor="zip">Zip Code</label>
         </div>
         <div className="input-field col s12" style={{textAlign: 'center'}}>
