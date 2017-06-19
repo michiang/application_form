@@ -18,6 +18,8 @@ export default class App extends Component {
     this.handleEmailBlur = this.handleEmailBlur.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
     this.confirmEmail = this.confirmEmail.bind(this);
+    this.handleZipChange = this.handleZipChange.bind(this);
+    this.handleZipBlur = this.handleZipBlur.bind(this);
     this.confirmZip = this.confirmZip.bind(this);
 	}  
 
@@ -42,8 +44,8 @@ export default class App extends Component {
     if (this.state.validate && this.state.email !== this.state.confirm) {
       let email = document.getElementById("email");
       let confirmEmail = document.getElementById("confirm");
-        function validateEmail(){
-          if(email.value != confirmEmail.value) {
+        function validateEmail() {
+          if (email.value != confirmEmail.value) {
             confirmEmail.setCustomValidity("Emails Don't Match");
           } else {
             confirmEmail.setCustomValidity('');
@@ -63,9 +65,37 @@ export default class App extends Component {
     return null;
   }
 
-  confirmZip() {
-  
+  handleZipChange(event) {
+    this.setState({zip: event.target.value});
   }
+
+  handleZipBlur() {
+    this.setState({zipValidate: true});
+  }
+
+  confirmZip() {
+    if (this.state.zipValidate && this.state.zip.length < 5) {
+      let confirmZip = document.getElementById("zip");
+        function validateZip() {
+          if (zip.value.length < 5) {  
+            confirmZip.setCustomValidity("Invalid Zip Code");      
+          } else {
+            confirmZip.setCustomValidity('');
+          }
+        }
+        zip.onchange = validateZip;
+        confirmZip.onkeyup = validateZip;
+
+    return (
+        <label htmlFor="zip" data-error="Invalid Zip Code">Zip Code</label>
+      );
+  } else if (this.state.zipValidate && this.state.zip.length >= 5) {
+    return (
+        <label htmlFor="zip" data-success="Valid Zip Code">Zip Code</label>
+      )
+  }
+  return null;    
+}
 
     render() {
     return (
@@ -81,8 +111,8 @@ export default class App extends Component {
           <p> 1. Selection Location/Position </p>
           <hr/>
     
-      <div className="input-field col s6">
-        <select>
+      <div className="input-field col s6" style={{display: 'inline'}}>
+        <select required>
           <option value="" disabled selected>Select Location</option>
           <option value="1">San Diego</option>
           <option value="2">Los Angeles</option>
@@ -166,7 +196,7 @@ export default class App extends Component {
           <label htmlFor="address2">Address 2</label>
         </div>
 
-      <div className="input-field col s12">
+      <div className="input-field col s9">
 
         <select>
           <option value="" disabled selected>Country</option>
@@ -190,9 +220,11 @@ export default class App extends Component {
 
       </div> 
         <div className="input-field col s4">
-          <input id="zip" type="number" value={this.state.zip} className="validate" required></input>
-          <label htmlFor="zip">Zip Code</label>
-        </div>
+          <input id="zip" type="tel" value={this.state.zip} onChange={this.handleZipChange} onBlur={this.handleZipBlur} minLength="5" className="validate" required></input>
+          {this.confirmZip() ||
+            <label htmlFor="zip">Zip Code</label>
+          }
+        </div> 
         <div className="input-field col s12" style={{textAlign: 'center'}}>
           <button className="btn waves-effect waves-light teal simple-forms" type="submit" name="action">Submit</button>
         </div>
